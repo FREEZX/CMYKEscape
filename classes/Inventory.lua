@@ -6,6 +6,9 @@ inventory.itemColor = {255, 255, 255, 255}
 inventory.textColor = {255, 255, 255, 255}
 inventory.hovered = nil
 inventory.inventoryFont = love.graphics.newFont()
+inventory.itemSize = 64
+inventory.margin = 5
+
 function inventory.hasItem(itemName)
     for i, v in ipairs(inventory.items) do
         if v:getName() == itemName then
@@ -47,14 +50,14 @@ function inventory.update()
     local count = 0
     local hovered = false
     for i, v in ipairs(inventory.items) do
-        if gui.Button{text="item", pos={count * 75 + 5, 5}, size={70, 70}} then
+        if gui.Button{text="item", pos={count * (inventory.itemSize + inventory.margin*2) + 5, 5}, size={70, 70}} then
             if inventory.selectedItem == v then
                 inventory.selectedItem = nil
             else
                 inventory.selectedItem = v
             end
         end
-        if mouseInRect({love.mouse.getPosition()}, {count * 80 + 5, 5}, {70, 70}) then
+        if mouseInRect({love.mouse.getPosition()}, {count * (inventory.itemSize + inventory.margin*2) + 5, 5}, {70, 70}) then
             hovered = true
             inventory.hovered = {}
             inventory.hovered.name = v:getName()
@@ -71,17 +74,17 @@ function inventory.draw()
     local items = inventory.getItems()
     local colorBak = {love.graphics.getColor()}
     love.graphics.setColor(inventory.bgColor)
-    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 80)
+    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 74)
 
     love.graphics.setColor(inventory.itemColor)
     local count = 0
     for i, v in ipairs(inventory.items) do
         if inventory.selectedItem == v then
             love.graphics.setColor(inventory.highlightColor)
-            love.graphics.rectangle("fill", count * 75 + 5, 5, 70, 70)
+            love.graphics.rectangle("fill", count * (inventory.itemSize + inventory.margin*2) + 5, 5, 64, 64)
             love.graphics.setColor(inventory.itemColor)
         end
-        love.graphics.draw(v:getImage(), count * 75 + 5, 5)
+        love.graphics.draw(v:getImage(), count * (inventory.itemSize + inventory.margin*2) + 5, 5)
         count = count + 1
     end
 

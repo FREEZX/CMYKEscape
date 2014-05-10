@@ -12,6 +12,7 @@ function love.load()
     love.filesystem.load("lib/base/Framework.lua")()
     love.filesystem.load("lib/sounds/SoundManager.lua")()
     love.filesystem.load("lib/fx/FxManager.lua")()
+    love.filesystem.load("classes/CircularBuffer.lua")()
     love.filesystem.load("classes/MessageManager.lua")()
     love.filesystem.load("classes/Inventory.lua")()
     love.filesystem.load("classes/InventoryItem.lua")()
@@ -58,7 +59,7 @@ function love.load()
 
     fxManager.loadFx("vignette")
 
-    game.switchLevel("Keycode")
+    game.switchLevel("ClosetBin")
 end
 function love.keypressed(key)
    if key == "escape" then
@@ -95,7 +96,6 @@ function fadeUpdate(dt)
     end
 end
 function love.draw()
-    love.graphics.setColor(255, 255, 255, game.alpha)
     game.draw()
     fxManager.draw()
     inventory.draw()
@@ -103,4 +103,7 @@ function love.draw()
     if game.alpha == 255 then
         gui.core.draw()
     end
+    love.graphics.setColor(0, 0, 0, 255-game.alpha)
+    love.graphics.rectangle("fill", 0, 0, game.shared.width, game.shared.height)
+    love.graphics.setColor(255, 255, 255, 255)
 end

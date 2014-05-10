@@ -13,15 +13,13 @@ game.storyboard = {
     },
     nothingThere = {
         "Nothing to do there.",
-        "I think i finished with that"
-    },
-    barrels = {
-        "I don't think i can roll those",
-        "Just some barrels"
+        "I think i'm done with that"
     },
     steam = {
         "I'm not getting through that, it's too hot",
         "Nope."
     },
-    boxes = "Boxes filled with dangerous materials."
+    boxes = "Boxes filled with dangerous materials.",
+    code = "The code reads 5302. I wonder where that goes?",
+    paint = "Fresh paint. I wonder why that's here."
 }
