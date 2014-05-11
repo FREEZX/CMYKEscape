@@ -6,7 +6,7 @@ inventory.itemColor = {255, 255, 255, 255}
 inventory.textColor = {255, 255, 255, 255}
 inventory.hovered = nil
 inventory.inventoryFont = love.graphics.newFont()
-inventory.itemSize = 64
+inventory.itemSize = 75
 inventory.margin = 5
 
 function inventory.hasItem(itemName)
@@ -36,7 +36,7 @@ end
 function inventory.removeItem(itemName)
     for i, v in ipairs(inventory.items) do
         if v:getName() == itemName then
-            inventory.items[i] = nil
+            table.remove(inventory.items, i)
             break
         end
     end
@@ -46,18 +46,19 @@ function inventory.getItems()
     return inventory.items
 end
 
+
 function inventory.update()
     local count = 0
     local hovered = false
     for i, v in ipairs(inventory.items) do
-        if gui.Button{text="item", pos={count * (inventory.itemSize + inventory.margin*2) + 5, 5}, size={70, 70}} then
+        if gui.Button{text="item", pos={count * (inventory.itemSize+5)+5, 0}, size={inventory.itemSize, inventory.itemSize}} then
             if inventory.selectedItem == v then
                 inventory.selectedItem = nil
             else
                 inventory.selectedItem = v
             end
         end
-        if mouseInRect({love.mouse.getPosition()}, {count * (inventory.itemSize + inventory.margin*2) + 5, 5}, {70, 70}) then
+        if mouseInRect({love.mouse.getPosition()}, {count * (inventory.itemSize+5)+5, 0}, {inventory.itemSize, inventory.itemSize}) then
             hovered = true
             inventory.hovered = {}
             inventory.hovered.name = v:getName()
@@ -74,17 +75,17 @@ function inventory.draw()
     local items = inventory.getItems()
     local colorBak = {love.graphics.getColor()}
     love.graphics.setColor(inventory.bgColor)
-    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 74)
+    love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 80)
 
     love.graphics.setColor(inventory.itemColor)
     local count = 0
     for i, v in ipairs(inventory.items) do
         if inventory.selectedItem == v then
             love.graphics.setColor(inventory.highlightColor)
-            love.graphics.rectangle("fill", count * (inventory.itemSize + inventory.margin*2) + 5, 5, 64, 64)
+            love.graphics.rectangle("fill", count * (inventory.itemSize+5)+5, 0, inventory.itemSize, inventory.itemSize)
             love.graphics.setColor(inventory.itemColor)
         end
-        love.graphics.draw(v:getImage(), count * (inventory.itemSize + inventory.margin*2) + 5, 5)
+        love.graphics.draw(v:getImage(), count * (inventory.itemSize+5)+5, 5)
         count = count + 1
     end
 

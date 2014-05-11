@@ -59,7 +59,7 @@ function love.load()
 
     fxManager.loadFx("vignette")
 
-    game.switchLevel("ClosetBin")
+    game.switchLevel("Bin")
 end
 function love.keypressed(key)
    if key == "escape" then
@@ -99,11 +99,11 @@ function love.draw()
     game.draw()
     fxManager.draw()
     inventory.draw()
-    messageManager.draw()
     if game.alpha == 255 then
         gui.core.draw()
     end
     love.graphics.setColor(0, 0, 0, 255-game.alpha)
     love.graphics.rectangle("fill", 0, 0, game.shared.width, game.shared.height)
     love.graphics.setColor(255, 255, 255, 255)
+    messageManager.draw()
 end

@@ -9,9 +9,13 @@ function game.update()
     if gui.Button{text="right-leave", pos=game.shared.rightButtonPos, size=game.shared.sideButtonSize} then
         game.switchLevelFade("ChestPot")
     end
-    if gui.Button{text="bin", pos={0.75 * love.graphics.getWidth(), 0.6 * love.graphics.getHeight()}, size={ 0.14 *love.graphics.getWidth(), 0.14 * love.graphics.getHeight()}} then
-        game.switchLevelFade("Bin")
-    end
+    if gui.Button{text="stuff", pos={0.45 * love.graphics.getWidth(), 0.6 * love.graphics.getHeight()}, size={0.11 *love.graphics.getWidth(), 0.14 * love.graphics.getHeight()}} then
+        messageManager.setMessage("Picked up the yellow glowing Icosahedron and a weird shaped object")
+        inventory.addItem("yellowIco")
+        inventory.addItem("shapeB")
+        game.state.chestDone = true
+        game.switchLevelFade("ChestPot")
+    end 
 end
 function game.draw()
     love.graphics.draw(content.chestopen, game.shared.xOffset, game.shared.yOffset, 0,

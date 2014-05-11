@@ -10,8 +10,10 @@ function game.update()
         game.switchLevelFade("Bed")
     end
     if gui.Button{text="chest", pos={0.5 * love.graphics.getWidth(), 0.45 * love.graphics.getHeight()}, size={ 0.25 *love.graphics.getWidth(), 0.14 * love.graphics.getHeight()}} then
-        if game.state.chestUnlocked then
+        if game.state.chestUnlocked and not game.state.chestDone then
             game.switchLevelFade("ChestOpen")
+        elseif game.state.chestDone then
+            messageManager.setMessage(game.storyboard.nothingThere)
         else
             game.switchLevelFade("Keycode")
         end
@@ -20,6 +22,7 @@ function game.update()
         if game.state.potKeyPicked then
             messageManager.setMessage(game.storyboard.nothingThere)
         else
+            messageManager.setMessage("Found a key under the soil")
             inventory.addItem("closetKey")
             game.state.potKeyPicked = true
         end

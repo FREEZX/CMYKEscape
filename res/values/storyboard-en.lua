@@ -20,6 +20,6 @@ game.storyboard = {
         "Nope."
     },
     boxes = "Boxes filled with dangerous materials.",
-    code = "The code reads 5302. I wonder where that goes?",
+    code = "The code reads 5362. I wonder where that goes?",
     paint = "Fresh paint. I wonder why that's here."
 }
