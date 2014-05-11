@@ -3,6 +3,7 @@ messageManager = {
     duration = 0,
     text = "",
     messageAlpha = 0,
+    messageShown = false,
     messageFont,
     defaultDuration = 2,
     fadeSpeed = 200,
@@ -24,11 +25,16 @@ function messageManager.setMessage(text, duration)
     messageManager.text = text
     messageManager.duration = duration
     messageManager.messageAlpha = 255
+    messageManager.update(.01)
+    messageManager.messageShown = true
 end
 
 function messageManager.update(dt)
     if love.timer.getTime() > messageManager.timeSet + messageManager.duration and messageManager.messageAlpha > 0 then
         messageManager.messageAlpha = messageManager.messageAlpha - dt * messageManager.fadeSpeed
+        if messageManager.messageAlpha <= 0 then
+            messageManager.messageShown = false
+        end
     end
 end
 

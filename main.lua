@@ -47,6 +47,8 @@ function love.load()
     game.shared.width = 1920
     game.shared.height = 1080
 
+    game.state.pickedIcos = 0
+
     game.shared.scale = math.min(love.graphics.getWidth() / game.shared.width, 
         love.graphics.getHeight() / game.shared.height);
 
@@ -59,7 +61,7 @@ function love.load()
 
     fxManager.loadFx("vignette")
 
-    game.switchLevel("Bin")
+    game.switchLevel("Bed")
 end
 function love.keypressed(key)
    if key == "escape" then

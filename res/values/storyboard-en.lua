@@ -3,6 +3,10 @@ game.storyboard = {
         "It's locked.",
         "Cannot open it without a key.",
     },
+    genericStuck = {
+        "It's stuck.",
+        "Cannot open with bare hands.",
+    },
     mirror = {
         "The mirror is dirty.",
         "A mirror."

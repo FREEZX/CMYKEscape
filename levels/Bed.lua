@@ -1,6 +1,6 @@
 content = {}
 function game.load()
-    content.bed = love.graphics.newImage("res/levels/bed.png")
+    content.bed = love.graphics.newImage("res/levels/bed.jpg")
     content.shapeA = love.graphics.newImage("res/levels/bed_shapea.png")
     content.shapeB = love.graphics.newImage("res/levels/bed_shapeb.png")
     content.paint = love.graphics.newImage("res/sprites/paint.png")
@@ -13,14 +13,16 @@ function game.update()
         game.switchLevelFade("ClosetBin")
     end
     if gui.Button{text="bedside-drawers", pos={0.75 * love.graphics.getWidth(), 0.43 * love.graphics.getHeight()}, size={ 0.14 *love.graphics.getWidth(), 0.14 * love.graphics.getHeight()}} then
-        if inventory.isSelected("S shaped object") and not game.state.drawersShapeA then
+        if game.state.bedDrawersPicked then
+            messageManager.setMessage(game.storyboard.nothingThere)
+        elseif inventory.isSelected("S shaped object") and not game.state.drawersShapeA then
             game.state.drawersShapeA = true
             inventory.removeItem("S shaped object")
         elseif inventory.isSelected("Weird shaped object") and not game.state.drawersShapeB then
             game.state.drawersShapeB = true
             inventory.removeItem("Weird shaped object")
         elseif game.state.drawersShapeB and game.state.drawersShapeA then
-            game.switchLevelFade("BedDrawers")
+            game.switchLevelFade("BedDrawer")
         else
             messageManager.setMessage("I cannot open it. There are weird shaped holes on the first drawer.")
         end

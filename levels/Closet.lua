@@ -15,6 +15,11 @@ function game.update()
         inventory.addItem("magentaIco")
         game.switchLevelFade("ClosetBin")
         game.state.closetDone = true
+        game.state.pickedIcos = game.state.pickedIcos + 1
+        if game.state.pickedIcos == 4 then
+            game.switchLevelFade("End")
+            return
+        end
     end
 end
 function game.draw()

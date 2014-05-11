@@ -62,7 +62,7 @@ function inventory.update()
             hovered = true
             inventory.hovered = {}
             inventory.hovered.name = v:getName()
-            inventory.hovered.xpos = count * 75;
+            inventory.hovered.xpos = count * (inventory.itemSize+5)+5;
         end
         count = count + 1
     end

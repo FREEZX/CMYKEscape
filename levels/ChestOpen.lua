@@ -14,7 +14,13 @@ function game.update()
         inventory.addItem("yellowIco")
         inventory.addItem("shapeB")
         game.state.chestDone = true
+        game.state.pickedIcos = game.state.pickedIcos + 1
+        
         game.switchLevelFade("ChestPot")
+        
+        if game.state.pickedIcos == 4 then
+            game.switchLevelFade("End")
+        end
     end 
 end
 function game.draw()

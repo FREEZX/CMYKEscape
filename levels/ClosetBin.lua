@@ -17,6 +17,19 @@ function game.update()
             messageManager.setMessage(game.storyboard.nothingThere)
         end
     end
+    if gui.Button{text="drawer", pos={0.55 * love.graphics.getWidth(), 0.46 * love.graphics.getHeight()}, size={ 0.14 *love.graphics.getWidth(), .18 * love.graphics.getHeight()}} then
+        if game.state.blackIcoDone then
+            messageManager.setMessage(game.storyboard.nothingThere)
+        elseif inventory.isSelected("Crowbar") then
+            game.state.drawerUnlocked = true
+            inventory.removeItem("Crowbar")
+            game.switchLevelFade("BlackDrawer")
+        elseif game.state.drawerUnlocked then
+            game.switchLevelFade("BlackDrawer")
+        else
+            messageManager.setMessage(game.storyboard.genericStuck)
+        end
+    end
     if gui.Button{text="closet", pos={0.15 * love.graphics.getWidth(), 80}, size={ 0.3 *love.graphics.getWidth(), .7 * love.graphics.getHeight()}} then
         if(game.state.closetunlocked) and not game.state.closetDone then
         	game.switchLevelFade("Closet")
